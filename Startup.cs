@@ -31,16 +31,18 @@ namespace WebSales
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 
             services.AddDbContext<WebSalesContext>(options =>
-                    //options.UseSqlServer(Configuration.GetConnectionString("WebSalesContext")));
                     options.UseMySql(connectioString, serverVersion));
+
+            services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
             else
             {
