@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebSales.Data;
+using WebSales.Models;
 
 namespace WebSales.Services
 {
@@ -20,5 +21,10 @@ namespace WebSales.Services
             return _context.Seller.ToList();
         }
 
+        public void Insert(Seller seller)
+        {
+            _context.Add(seller);
+            _context.SaveChanges();
+        }
     }
 }
