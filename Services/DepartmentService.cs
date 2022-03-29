@@ -2,6 +2,8 @@
 using System.Linq;
 using WebSales.Data;
 using WebSales.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace WebSales.Services
 {
@@ -14,9 +16,9 @@ namespace WebSales.Services
             _context = context;
         }
 
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync()
         {
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }
